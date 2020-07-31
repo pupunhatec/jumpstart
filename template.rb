@@ -306,11 +306,13 @@ after_bundle do
   add_administrate
 
   # Commit everything to git
-  unless ENV["SKIP_GIT"]
-    git :init
-    git add: "."
-    git commit: %Q{ -m 'Initial commit' }
-  end
+# error: "git fatal: unable to auto-detect email address"
+# verifyting if "rails new" already does that....if confirmed, just delete completely this block....
+#  unless ENV["SKIP_GIT"]
+#    git :init
+#    git add: "."
+#    git commit: %Q{ -m 'Initial commit' }
+#  end
 
   say
   say "Jumpstart app successfully created!", :blue
