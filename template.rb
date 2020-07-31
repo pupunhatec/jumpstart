@@ -280,14 +280,15 @@ after_bundle do
       # For details on connection pooling, see Rails configuration guide
       # http://guides.rubyonrails.org/configuring.html#database-pooling
       pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+      url: <%= ENV.fetch('DATABASE_URL') %>
 
     development:
       <<: *default
-      database: <%= ENV['DATABASE_URL'] + 'app_development' %>
+      database: app_development
 
     test:
       <<: *default
-      database: <%= ENV['DATABASE_URL'] + 'app_test' %>
+      database: app_test
 
     production:
       <<: *default
