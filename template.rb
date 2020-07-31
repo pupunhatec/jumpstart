@@ -271,6 +271,31 @@ after_bundle do
   add_whenever
   add_sitemap
 
+  remove_file 'config/database.yml'
+
+  file 'config/database.yml', <<-CODE
+    default: &default
+      adapter: postgresql
+      encoding: unicode
+      # For details on connection pooling, see Rails configuration guide
+      # http://guides.rubyonrails.org/configuring.html#database-pooling
+      pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+    development:
+      <<: *default
+      database: <%= ENV['DATABASE_URL'] || 'app_development' %>
+
+    test:
+      <<: *default
+      database: <%= ENV['DATABASE_URL'] || 'app_test' %>
+
+    production:
+      <<: *default
+      database: app_production
+      username: app
+      password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+  CODE
+
   # Migrate
   rails_command "db:create"
   rails_command "active_storage:install"
