@@ -283,11 +283,11 @@ after_bundle do
 
     development:
       <<: *default
-      database: <%= ENV['DATABASE_URL'] || 'app_development' %>
+      database: <%= ENV['DATABASE_URL'] + 'app_development' %>
 
     test:
       <<: *default
-      database: <%= ENV['DATABASE_URL'] || 'app_test' %>
+      database: <%= ENV['DATABASE_URL'] + 'app_test' %>
 
     production:
       <<: *default
